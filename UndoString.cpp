@@ -3,6 +3,7 @@
 #include "UndoSystem.hpp"
 #include <iostream>
 #include <string>
+#include <cassert>
 
 // undo data
 
@@ -10,11 +11,25 @@ struct UndoString;
 
 struct MyUndoData : UndoData
 {
+    static int s_alive_count;
+
+    MyUndoData()
+    {
+        ++s_alive_count;
+    }
+
+    ~MyUndoData()
+    {
+        --s_alive_count;
+    }
+
     UndoString *get_base(void *base)
     {
         return static_cast<UndoString *>(base);
     }
 };
+
+int MyUndoData::s_alive_count = 0;
 
 struct UndoData_Replace : MyUndoData
 {
@@ -134,7 +149,7 @@ void UndoString::insert(std::size_t index, const std::string& inserted)
 void UndoString::do_replace(std::size_t index, std::size_t count, const std::string& with)
 {
     std::string replaced = m_str.substr(index, count);
-    auto undo = std::make_shared<UndoData_Replace>();
+    auto undo = new UndoData_Replace();
     undo->m_index = index;
     undo->m_replaced = replaced;
     undo->m_with = with;
@@ -145,7 +160,7 @@ void UndoString::do_replace(std::size_t index, std::size_t count, const std::str
 void UndoString::do_erase(std::size_t index, std::size_t count)
 {
     std::string erased = m_str.substr(index, count);
-    auto undo = std::make_shared<UndoData_Erase>();
+    auto undo = new UndoData_Erase();
     undo->m_index = index;
     undo->m_count = count;
     undo->m_erased = erased;
@@ -155,7 +170,7 @@ void UndoString::do_erase(std::size_t index, std::size_t count)
 
 void UndoString::do_insert(std::size_t index, const std::string& inserted)
 {
-    auto undo = std::make_shared<UndoData_Insert>();
+    auto undo = new UndoData_Insert();
     undo->m_index = index;
     undo->m_inserted = inserted;
     insert(index, inserted);
@@ -165,6 +180,8 @@ void UndoString::do_insert(std::size_t index, const std::string& inserted)
 int main(void)
 {
     UndoString str;
+
+    assert(MyUndoData::s_alive_count == 0);
 
     str.print();
     str.do_insert(0, "ABCDEF");
@@ -188,6 +205,10 @@ int main(void)
     str.print();
     str.undo();
     str.print();
+
+    str.clear_undo_buffer();
+
+    assert(MyUndoData::s_alive_count == 0);
 
     return 0;
 }
