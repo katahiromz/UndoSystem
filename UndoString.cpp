@@ -130,6 +130,7 @@ void UndoString::insert(std::size_t index, const std::string& inserted)
 }
 
 // do actions with undo info
+
 void UndoString::do_replace(std::size_t index, std::size_t count, const std::string& with)
 {
     std::string replaced = m_str.substr(index, count);
@@ -166,7 +167,7 @@ int main(void)
     UndoString str;
 
     str.print();
-    str.do_insert(0, "TEST");
+    str.do_insert(0, "ABCDEF");
     str.print();
     str.do_replace(1, 2, "<>");
     str.print();
