@@ -1,7 +1,7 @@
 // UndoSystem.hpp --- Undo/Redo framework for C++11
 // Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>.
 #ifndef UNDO_SYSTEM_HPP_
-#define UNDO_SYSTEM_HPP_    2   // Version 2
+#define UNDO_SYSTEM_HPP_    3   // Version 3
 
 #include <deque>    // for std::deque
 #include <memory>   // for std::shared_ptr
@@ -55,10 +55,10 @@ struct UndoSystem
         return false;
     }
 
-    void add_undo(std::shared_ptr<UndoData> info)
+    void add_undo(std::shared_ptr<UndoData> data)
     {
         m_undo_buffer.resize(m_undo_index);
-        m_undo_buffer.push_back(info);
+        m_undo_buffer.push_back(data);
         ++m_undo_index;
     }
 
