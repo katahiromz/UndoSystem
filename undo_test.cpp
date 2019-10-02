@@ -1,4 +1,4 @@
-// UndoString.cpp --- An example of UndoSystem
+// undo_test.cpp --- An example of UndoSystem
 // Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>.
 #include "UndoSystem.hpp"
 #include <iostream>

@@ -6,7 +6,7 @@
 
 ## How to use?
 
-See [UndoString.cpp](UndoString.cpp).
+See [undo_test.cpp](undo_test.cpp).
 
 License: MIT
 
