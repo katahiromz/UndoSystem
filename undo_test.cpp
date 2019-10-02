@@ -149,23 +149,27 @@ void UndoString::insert(std::size_t index, const std::string& inserted)
 void UndoString::do_replace(std::size_t index, std::size_t count, const std::string& with)
 {
     std::string replaced = m_str.substr(index, count);
+
     auto undo = new UndoData_Replace();
     undo->m_index = index;
     undo->m_replaced = replaced;
     undo->m_with = with;
-    replace(index, count, with);
     add_undo(undo);
+
+    replace(index, count, with);
 }
 
 void UndoString::do_erase(std::size_t index, std::size_t count)
 {
     std::string erased = m_str.substr(index, count);
+
     auto undo = new UndoData_Erase();
     undo->m_index = index;
     undo->m_count = count;
     undo->m_erased = erased;
-    erase(index, count);
     add_undo(undo);
+
+    erase(index, count);
 }
 
 void UndoString::do_insert(std::size_t index, const std::string& inserted)
@@ -173,8 +177,9 @@ void UndoString::do_insert(std::size_t index, const std::string& inserted)
     auto undo = new UndoData_Insert();
     undo->m_index = index;
     undo->m_inserted = inserted;
-    insert(index, inserted);
     add_undo(undo);
+
+    insert(index, inserted);
 }
 
 int main(void)
