@@ -6,8 +6,8 @@
 
 ## How to use?
 
-See `"UndoString.cpp"`.
+See [UndoString.cpp](UndoString.cpp).
 
 License: MIT
 
-Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>.
+Copyright (C) 2019 Katayama Hirofumi MZ (katayama.hirofumi.mz@gmail.com).
