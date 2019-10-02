@@ -42,7 +42,7 @@ struct UndoData_Insert : MyUndoData
     virtual void apply_forward(void *base);
 };
 
-// the main data
+// the main data (base)
 
 struct UndoString : UndoSystem
 {
