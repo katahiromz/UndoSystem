@@ -193,6 +193,8 @@ int main(void)
     str.do_erase(0, 3);
     str.print();
 
+    assert(MyUndoData::s_alive_count > 0);
+
     str.undo();
     str.print();
     str.undo();
