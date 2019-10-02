@@ -1,4 +1,4 @@
-// UndoSystem.hpp --- Undo/Redo system for C++11
+// UndoSystem.hpp --- Undo/Redo framework for C++11
 // Copyright (C) 2019 Katayama Hirofumi MZ <katayama.hirofumi.mz@gmail.com>.
 #ifndef UNDO_SYSTEM_HPP_
 #define UNDO_SYSTEM_HPP_    2   // Version 2
